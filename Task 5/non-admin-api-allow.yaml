@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: non-admin-api-allow
+  namespace: propdevelopment
+spec:
+  podSelector:
+    matchLabels:
+      app: back-end-api
+      tier: api
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: front-end
+    ports:
+    - protocol: TCP
+      port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: admin-api-allow
+  namespace: propdevelopment
+spec:
+  podSelector:
+    matchLabels:
+      app: admin-back-end-api
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: admin-front-end
+    ports:
+    - protocol: TCP
+      port: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: propdevelopment
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  ingress: []
