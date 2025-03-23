@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-end-svc
+  namespace: propdevelopment
+spec:
+  selector:
+    app: front-end
+  ports:
+  - port: 80
+    targetPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: back-end-api-svc
+  namespace: propdevelopment
+spec:
+  selector:
+    app: back-end-api
+  ports:
+  - port: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-front-end-svc
+  namespace: propdevelopment
+spec:
+  selector:
+    app: admin-front-end
+  ports:
+  - port: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-back-end-api-svc
+  namespace: propdevelopment
+spec:
+  selector:
+    app: admin-back-end-api
+  ports:
+  - port: 80
